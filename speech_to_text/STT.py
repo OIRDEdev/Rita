@@ -3,10 +3,16 @@ from deepgram import (
     PrerecordedOptions,
     FileSource,
 )
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+deepgram_api = os.getenv("DEEPGRAM_API")
 
 def transcrever_audio(arquivo="../voz.wav"):
     try:
-        deepgram = DeepgramClient("8b1333579c317821cc9ebbf32b313e96d9c55c71")
+        deepgram = DeepgramClient(deepgram_api)
         with open(arquivo, "rb") as file:
             buffer_data = file.read()
         payload: FileSource = {
